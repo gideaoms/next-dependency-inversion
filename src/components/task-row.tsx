@@ -1,29 +1,19 @@
 "use client";
 
 import classNames from "classnames";
-import { ITask } from "@/types/task";
 import { useState } from "react";
+import * as TaskModel from "../core/models/task";
+import { useRepositories } from "@/contexts/repositories";
 
-export function TaskRow(props: { task: ITask }) {
+export function TaskRow(props: { task: TaskModel.Model }) {
   const [task, setTask] = useState(props.task);
+  const { repositories } = useRepositories();
 
   async function update(checked: boolean) {
-    const updatedTask: ITask = {
-      ...task,
-      status: checked ? "done" : "pending",
-    };
-    const response = await fetch(
-      `http://localhost:3000/tasks/${updatedTask.id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "put",
-        body: JSON.stringify(updatedTask),
-      }
-    );
-    const json = await response.json();
-    setTask(json);
+    const status = checked ? "done" : "pending";
+    const taskWithNewStatus = TaskModel.updateStatus(task, status);
+    const updatedTask = await repositories.task.update(taskWithNewStatus);
+    setTask(updatedTask);
   }
 
   return (

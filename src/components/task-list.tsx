@@ -2,34 +2,25 @@
 
 import { TaskForm } from "@/components/task-form";
 import { TaskRow } from "@/components/task-row";
-import { ITask } from "@/types/task";
 import { useState } from "react";
+import * as TaskModel from "../core/models/task";
+import { useRepositories } from "@/contexts/repositories";
 
-export function TaskList(props: { tasks: ITask[] }) {
+export function TaskList(props: { tasks: TaskModel.Model[] }) {
   const [tasks, setTasks] = useState(props.tasks);
+  const { repositories } = useRepositories();
 
   async function create(description: string) {
-    const task: ITask = {
-      id: undefined!,
-      description,
-      status: "pending",
-    };
-    const response = await fetch("http://localhost:3000/tasks", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "post",
-      body: JSON.stringify(task),
-    });
-    const json = await response.json();
-    setTasks((prev) => [...prev, json]);
+    const task = TaskModel.build({ id: String(tasks.length + 1), description });
+    const createdTask = await repositories.task.create(task);
+    setTasks((tasks) => [...tasks, createdTask]);
   }
 
   return (
     <div>
       <TaskForm onSubmit={create} />
       <ul>
-        {tasks.map((task: ITask) => (
+        {tasks.map((task) => (
           <TaskRow key={task.id} task={task} />
         ))}
       </ul>

@@ -1,7 +1,8 @@
-import { TaskList } from "@/components/task-list";
+import { TaskLoader } from "@/components/task-loader";
+import * as TaskRepository from "../../infra/repositories/task";
+
+const taskRepository = new TaskRepository.Repository();
 
 export default async function Page() {
-  const response = await fetch("http://localhost:3000/tasks");
-  const tasks = await response.json();
-  return <TaskList tasks={tasks} />;
+  return <TaskLoader taskRepository={taskRepository} />;
 }

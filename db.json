@@ -3,7 +3,7 @@
     {
       "id": "1",
       "description": "Task 1",
-      "status": "done"
+      "status": "pending"
     },
     {
       "id": "2",
@@ -13,6 +13,11 @@
     {
       "id": "3",
       "description": "Task 3",
+      "status": "pending"
+    },
+    {
+      "id": "4",
+      "description": "Task 4",
       "status": "done"
     }
   ]

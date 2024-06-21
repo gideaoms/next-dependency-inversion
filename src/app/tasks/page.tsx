@@ -1,5 +1,5 @@
 import { TaskLoader } from "@/components/task-loader";
-import * as TaskRepository from "../../infra/repositories/task";
+import * as TaskRepository from "@/infra/repositories/task";
 
 const taskRepository = new TaskRepository.Repository();
 

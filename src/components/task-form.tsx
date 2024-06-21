@@ -18,8 +18,8 @@ export function TaskForm(props: { onSubmit: (description: string) => void }) {
 
   return (
     <form
-      onSubmit={form.handleSubmit(({ description }) => {
-        props.onSubmit(description);
+      onSubmit={form.handleSubmit((data) => {
+        props.onSubmit(data.description);
         form.reset();
       })}
     >

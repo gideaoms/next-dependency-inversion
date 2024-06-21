@@ -1,5 +1,5 @@
-import * as TaskRepository from '../../core/repositories/task'
-import * as TaskModel from '../../core/models/task'
+import * as TaskRepository from '@/core/repositories/task'
+import * as TaskModel from '@/core/models/task'
 import { z } from 'zod'
 
 export class Repository implements TaskRepository.Repository {

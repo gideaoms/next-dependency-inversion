@@ -6,6 +6,10 @@ export type Model = {
   readonly status: Status
 }
 
+export function isDone(model: Model) {
+  return model.status === 'done'
+}
+
 export function updateStatus(model: Model, status: Status) {
   return build({ ...model, status })
 }

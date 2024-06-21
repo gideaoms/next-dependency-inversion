@@ -1,4 +1,4 @@
-import * as TaskModel from '../models/task'
+import * as TaskModel from '@/core/models/task'
 
 export type Repository = {
   findMany: () => Promise<TaskModel.Model[]>

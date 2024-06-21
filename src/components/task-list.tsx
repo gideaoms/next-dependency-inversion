@@ -3,7 +3,7 @@
 import { TaskForm } from "@/components/task-form";
 import { TaskRow } from "@/components/task-row";
 import { useState } from "react";
-import * as TaskModel from "../core/models/task";
+import * as TaskModel from "@/core/models/task";
 import { useRepositories } from "@/contexts/repositories";
 
 export function TaskList(props: { tasks: TaskModel.Model[] }) {

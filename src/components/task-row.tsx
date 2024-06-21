@@ -2,7 +2,7 @@
 
 import classNames from "classnames";
 import { useState } from "react";
-import * as TaskModel from "../core/models/task";
+import * as TaskModel from "@/core/models/task";
 import { useRepositories } from "@/contexts/repositories";
 
 export function TaskRow(props: { task: TaskModel.Model }) {
@@ -10,7 +10,7 @@ export function TaskRow(props: { task: TaskModel.Model }) {
   const { repositories } = useRepositories();
 
   async function update(checked: boolean) {
-    const status = checked ? "done" : "pending";
+    const status: TaskModel.Status = checked ? "done" : "pending";
     const taskWithNewStatus = TaskModel.updateStatus(task, status);
     const updatedTask = await repositories.task.update(taskWithNewStatus);
     setTask(updatedTask);
@@ -20,14 +20,14 @@ export function TaskRow(props: { task: TaskModel.Model }) {
     <li>
       <span
         className={classNames({
-          "line-through": task.status === "done",
+          "line-through": TaskModel.isDone(task),
         })}
       >
         {task.description}
       </span>
       <input
         type="checkbox"
-        checked={task.status === "done"}
+        checked={TaskModel.isDone(task)}
         onChange={(ev) => update(ev.target.checked)}
       />
     </li>

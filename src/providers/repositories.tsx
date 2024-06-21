@@ -1,7 +1,7 @@
 "use client";
 
 import { RepositoriesContext } from "@/contexts/repositories";
-import * as TaskRepository from "../infra/repositories/task";
+import * as TaskRepository from "@/infra/repositories/task";
 import { ReactNode } from "react";
 
 const repositories = {
